@@ -183,7 +183,7 @@ def classify_with_confidence(prompt):
 # -----------------------------
 def get_openrouter_response(prompt):
     headers = {
-        "Authorization": f"Bearer {st.secretst["OPEN_ROUTER"]}",
+        "Authorization": f"Bearer {st.secrets["OPEN_ROUTER"]}",
         "Content-Type": "application/json",
     }
 
