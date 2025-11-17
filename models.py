@@ -10,23 +10,24 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 # Config / Paths
 # -----------------------------
 # ===== BiLSTM Model  =====
-model_path_1 = hf_hub_download("Ranasalh/DLmodel", filename="DL_BiLSTM_model.h5")
+hf_token = st.secrets["HF_TOKEN"]
+model_path_1 = hf_hub_download("Ranasalh/DLmodel", filename="DL_BiLSTM_model.h5",token=hf_token)
 model_1 = keras.models.load_model(model_path_1)
 
-vec_path_1 = hf_hub_download("Ranasalh/DLmodel", filename="tokenizer.pkl")
+vec_path_1 = hf_hub_download("Ranasalh/DLmodel", filename="tokenizer.pkl",token=hf_token)
 vectorizer_1 = joblib.load(vec_path_1)
 
 max_length = 100
 
 # ===== Logistic Regression Model  =====
 repo_id_2 = "Ranasalh/prompt_safety_2_lr_more_f_and_new_data"
-model_path_2 = hf_hub_download(repo_id=repo_id_2, filename="best_logistic_model.pkl")
-vectorizer_path_2 = hf_hub_download(repo_id=repo_id_2, filename="tfidf_vectorizer.pkl")
+model_path_2 = hf_hub_download(repo_id=repo_id_2, filename="best_logistic_model.pkl",token=hf_token)
+vectorizer_path_2 = hf_hub_download(repo_id=repo_id_2, filename="tfidf_vectorizer.pkl",token=hf_token)
 model_2 = joblib.load(model_path_2)
 vectorizer_2 = joblib.load(vectorizer_path_2)
 
 # ===== OpenRouter =====n
-os.environ.setdefault("OPEN_ROUTER", "")  # ضع مفتاحك في متغير البيئة OPEN_ROUTER
+os.environ.setdefault("OPEN_ROUTER", "st.secrets["OPENAI_API_KEY"]")  # ضع مفتاحك في متغير البيئة OPEN_ROUTER
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODEL = "nvidia/nemotron-nano-12b-v2-vl:free"
 
@@ -180,7 +181,7 @@ def classify_with_confidence(prompt):
 # -----------------------------
 def get_openrouter_response(prompt):
     headers = {
-        "Authorization": f"Bearer {os.environ.get('OPEN_ROUTER')}",
+        "Authorization": f"Bearer {st.secrets["OPENAI_API_KEY"]}",
         "Content-Type": "application/json",
     }
 
