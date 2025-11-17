@@ -223,8 +223,8 @@ def process_prompt(prompt):
         f"(chosen from {result['final']['winner']}, confidence {final_conf:.3f})"
     )
     if result['final']['label'] == 'UNSAFE':
-       # msg = "\n\n⚠️ The LLM refused to answer due to safety concerns, so the response was blocked."
-       msg
+       msg = "\n\n⚠️ The LLM refused to answer due to safety concerns, so the response was blocked."
+       
 
     # Only call LLM if SAFE
     if result['final']['label'] == 'SAFE':
@@ -238,7 +238,7 @@ def process_prompt(prompt):
 
         # check if model refused
         if any(key in ai_response.lower() for key in refusal_keywords):
-            msg += "\n\n⚠️ The LLM refused to answer due to safety concerns, so the response was blocked."
+            msg = "\n\n⚠️ The LLM refused to answer due to safety concerns, so the response was blocked."
         else:
             msg = f"\n\nResponse:\n{ai_response}"
 
