@@ -26,21 +26,8 @@ PRIMARY_COLOR = "#003366"
 # --- Page setup ---
 st.set_page_config(page_title="Prompt Classifier Chatbot", page_icon="🤖", layout="centered")
 
-# =========================
-# Team Section (Sidebar)
-# =========================
-st.sidebar.title("👥 Project Team")
 
-team_members = {
-    "Rana": "https://github.com/RanaSaleh2",
-    "Haitham": "https://github.com/Ha80ii",
-    "Danah": "https://github.com/dralsarrani",
-    "Ghadi": "https://github.com/GhadiBa",
-}
 
-for name, url in team_members.items():
-    st.sidebar.markdown(f"- [{name}]({url})")
-    st.markdown("---")
 
 # --- Session state ---
 ms = st.session_state
@@ -159,6 +146,16 @@ def apply_theme(theme_name):
 
 # --- Sidebar ---
 with st.sidebar:
+    st.sidebar.title("👥 Project Team")
+    team_members = {
+    "Rana": "https://github.com/RanaSaleh2",
+    "Haitham": "https://github.com/Ha80ii",
+    "Danah": "https://github.com/dralsarrani",
+    "Ghadi": "https://github.com/GhadiBa",}
+    for name, url in team_members.items():
+        st.sidebar.markdown(f"- [{name}]({url})")
+    st.markdown("---")    
+    #------------------------------------------
     st.markdown("## ⚙ Settings")
     if st.button("🔄 New Chat", use_container_width=True):
         new_chat()
